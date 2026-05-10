@@ -1,1 +1,137 @@
-<h1>Welcome To Homepage</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Forest Fire Predictor</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+	<style>
+		:root {
+			--bg: #f3efe7;
+			--ink: #1a1816;
+			--card: #fffdf8;
+			--accent: #d35b2a;
+			--accent-dark: #a7441d;
+			--muted: #5b534b;
+			--ring: #f0b299;
+			--shadow: 0 20px 40px rgba(39, 31, 24, 0.15);
+		}
+
+		* {
+			box-sizing: border-box;
+		}
+
+		body {
+			margin: 0;
+			min-height: 100vh;
+			font-family: "Manrope", sans-serif;
+			color: var(--ink);
+			background:
+				radial-gradient(circle at 10% 20%, #ffe7c6 0 25%, transparent 26%),
+				radial-gradient(circle at 90% 10%, #f9d2a4 0 20%, transparent 21%),
+				linear-gradient(165deg, #f7efe1 0%, #ece4d7 45%, #e6ddd0 100%);
+			display: grid;
+			place-items: center;
+			padding: 24px;
+		}
+
+		.hero {
+			width: min(920px, 100%);
+			background: var(--card);
+			border-radius: 28px;
+			box-shadow: var(--shadow);
+			padding: clamp(24px, 5vw, 56px);
+			border: 1px solid #efe3d5;
+		}
+
+		.eyebrow {
+			display: inline-block;
+			font-weight: 700;
+			letter-spacing: 0.08em;
+			text-transform: uppercase;
+			color: var(--accent-dark);
+			background: #fee4d7;
+			padding: 8px 12px;
+			border-radius: 999px;
+			font-size: 12px;
+			margin-bottom: 14px;
+		}
+
+		h1 {
+			margin: 0;
+			line-height: 1.1;
+			font-size: clamp(32px, 6vw, 58px);
+			max-width: 12ch;
+		}
+
+		p {
+			margin: 18px 0 0;
+			color: var(--muted);
+			font-size: clamp(16px, 2.3vw, 20px);
+			max-width: 50ch;
+		}
+
+		.actions {
+			margin-top: 28px;
+			display: flex;
+			gap: 12px;
+			flex-wrap: wrap;
+		}
+
+		.btn {
+			text-decoration: none;
+			border-radius: 14px;
+			padding: 14px 20px;
+			font-weight: 700;
+			transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+		}
+
+		.btn-primary {
+			background: var(--accent);
+			color: #fff;
+			box-shadow: 0 12px 22px rgba(211, 91, 42, 0.35);
+		}
+
+		.btn-secondary {
+			background: #fff;
+			color: var(--ink);
+			border: 1px solid #eadaca;
+		}
+
+		.btn:hover {
+			transform: translateY(-2px);
+		}
+
+		.btn-primary:hover {
+			background: #bf4f24;
+			box-shadow: 0 16px 26px rgba(191, 79, 36, 0.35);
+		}
+
+		.btn:focus-visible {
+			outline: 3px solid var(--ring);
+			outline-offset: 3px;
+		}
+
+		@media (max-width: 640px) {
+			.hero {
+				border-radius: 22px;
+			}
+		}
+	</style>
+</head>
+<body>
+	<section class="hero">
+		<span class="eyebrow">ML Forecast Tool</span>
+		<h1>Predict Forest Fire Area In Seconds</h1>
+		<p>
+			Enter field values from your weather and fire index observations and let the trained model estimate the potential fire area.
+		</p>
+		<div class="actions">
+			<a class="btn btn-primary" href="{{ url_for('predict') }}">Open Predictor</a>
+			<a class="btn btn-secondary" href="{{ url_for('predict') }}">Try With Sample Inputs</a>
+		</div>
+	</section>
+</body>
+</html>

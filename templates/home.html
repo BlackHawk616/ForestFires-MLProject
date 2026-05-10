@@ -4,23 +4,223 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Forest Fire Prediction</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+	<style>
+		:root {
+			--bg: #f6f1e9;
+			--panel: #fffdf8;
+			--ink: #1f1b17;
+			--muted: #5d544b;
+			--line: #e8dbc9;
+			--accent: #db5a26;
+			--accent-deep: #ba461a;
+			--success-bg: #ecf7ee;
+			--success-ink: #1f6a33;
+			--shadow: 0 20px 44px rgba(44, 33, 24, 0.14);
+		}
+
+		* {
+			box-sizing: border-box;
+		}
+
+		body {
+			margin: 0;
+			font-family: "Manrope", sans-serif;
+			background:
+				radial-gradient(circle at 90% 0%, #f9d7b9 0 18%, transparent 19%),
+				radial-gradient(circle at 0% 100%, #f6ccac 0 20%, transparent 21%),
+				linear-gradient(160deg, #f7efe3 0%, #eee5d8 45%, #e9e0d3 100%);
+			color: var(--ink);
+			min-height: 100vh;
+			padding: 26px;
+			display: grid;
+			place-items: center;
+		}
+
+		.layout {
+			width: min(980px, 100%);
+			display: grid;
+			grid-template-columns: 1.1fr 1fr;
+			gap: 20px;
+		}
+
+		.card {
+			background: var(--panel);
+			border: 1px solid var(--line);
+			border-radius: 24px;
+			box-shadow: var(--shadow);
+			padding: clamp(20px, 3vw, 34px);
+		}
+
+		.hero h1 {
+			font-size: clamp(28px, 4.6vw, 42px);
+			line-height: 1.12;
+			margin: 0;
+		}
+
+		.hero p {
+			margin: 14px 0 0;
+			color: var(--muted);
+			max-width: 42ch;
+		}
+
+		.badge {
+			display: inline-block;
+			margin-bottom: 12px;
+			font-size: 12px;
+			font-weight: 800;
+			letter-spacing: 0.08em;
+			text-transform: uppercase;
+			color: #8b3718;
+			background: #fee5d7;
+			padding: 8px 12px;
+			border-radius: 999px;
+		}
+
+		.grid {
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			gap: 14px;
+			margin-top: 18px;
+		}
+
+		.field {
+			display: grid;
+			gap: 6px;
+		}
+
+		label {
+			font-size: 13px;
+			font-weight: 700;
+			color: #544a41;
+		}
+
+		input {
+			width: 100%;
+			padding: 12px 13px;
+			border: 1px solid #ddcebb;
+			border-radius: 12px;
+			font-size: 15px;
+			background: #fffdfa;
+		}
+
+		input:focus {
+			outline: 3px solid rgba(219, 90, 38, 0.2);
+			border-color: #d4754f;
+		}
+
+		button {
+			width: 100%;
+			margin-top: 18px;
+			border: none;
+			border-radius: 13px;
+			padding: 14px 18px;
+			font-size: 16px;
+			font-weight: 800;
+			background: var(--accent);
+			color: #fff;
+			cursor: pointer;
+			transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+			box-shadow: 0 12px 22px rgba(219, 90, 38, 0.32);
+		}
+
+		button:hover {
+			transform: translateY(-1px);
+			background: var(--accent-deep);
+		}
+
+		.result {
+			margin-top: 16px;
+			padding: 14px;
+			border-radius: 12px;
+			background: var(--success-bg);
+			color: var(--success-ink);
+			font-weight: 700;
+		}
+
+		.quick-links {
+			margin-top: 14px;
+		}
+
+		.quick-links a {
+			text-decoration: none;
+			font-weight: 700;
+			color: #8e3a1b;
+		}
+
+		@media (max-width: 860px) {
+			.layout {
+				grid-template-columns: 1fr;
+			}
+
+			.grid {
+				grid-template-columns: 1fr;
+			}
+		}
+	</style>
 </head>
 <body>
-	<h1>Forest Fire Prediction</h1>
-	<p>Enter the weather and fire index values below to get a prediction.</p>
+	<div class="layout">
+		<section class="card hero">
+			<span class="badge">Prediction Workspace</span>
+			<h1>Forest Fire Risk Estimator</h1>
+			<p>
+				Fill in atmospheric and fire weather values to estimate the predicted fire area using your trained ML model.
+			</p>
+			<div class="quick-links">
+				<a href="{{ url_for('index') }}">Return to Home</a>
+			</div>
+		</section>
 
-	<form action="{{ url_for('predict') }}" method="post">
-		<input type="text" name="Temperature" placeholder="Temperature" required="required" /><br>
-		<input type="text" name="RH" placeholder="RH" required="required" /><br>
-		<input type="text" name="Ws" placeholder="Ws" required="required" /><br>
-		<input type="text" name="Rain" placeholder="Rain" required="required" /><br>
-		<input type="text" name="FFMC" placeholder="FFMC" required="required" /><br>
-		<input type="text" name="DMC" placeholder="DMC" required="required" /><br>
-		<input type="text" name="ISI" placeholder="ISI" required="required" /><br>
-		<input type="text" name="Classes" placeholder="Classes" required="required" /><br>
-		<input type="text" name="Region" placeholder="Region" required="required" /><br>
-		<button type="submit" class="btn btn-primary btn-block btn-large">Predict</button>
-	</form>
-    <h1>The FWI Predctions is {{prediction_text}}</h1>
+		<section class="card">
+			<form action="{{ url_for('predict') }}" method="post">
+				<div class="grid">
+					<div class="field">
+						<label for="Temperature">Temperature</label>
+						<input id="Temperature" type="number" step="any" name="Temperature" placeholder="e.g. 29.5" required>
+					</div>
+					<div class="field">
+						<label for="RH">Relative Humidity</label>
+						<input id="RH" type="number" step="any" name="RH" placeholder="e.g. 57" required>
+					</div>
+					<div class="field">
+						<label for="Ws">Wind Speed</label>
+						<input id="Ws" type="number" step="any" name="Ws" placeholder="e.g. 18" required>
+					</div>
+					<div class="field">
+						<label for="Rain">Rain</label>
+						<input id="Rain" type="number" step="any" name="Rain" placeholder="e.g. 0.0" required>
+					</div>
+					<div class="field">
+						<label for="FFMC">FFMC</label>
+						<input id="FFMC" type="number" step="any" name="FFMC" placeholder="e.g. 85.1" required>
+					</div>
+					<div class="field">
+						<label for="DMC">DMC</label>
+						<input id="DMC" type="number" step="any" name="DMC" placeholder="e.g. 12.3" required>
+					</div>
+					<div class="field">
+						<label for="ISI">ISI</label>
+						<input id="ISI" type="number" step="any" name="ISI" placeholder="e.g. 5.2" required>
+					</div>
+					<div class="field">
+						<label for="Classes">Classes</label>
+						<input id="Classes" type="number" step="any" name="Classes" placeholder="e.g. 1" required>
+					</div>
+					<div class="field">
+						<label for="Region">Region</label>
+						<input id="Region" type="number" step="any" name="Region" placeholder="e.g. 0 or 1" required>
+					</div>
+				</div>
+				<button type="submit">Predict Fire Area</button>
+			</form>
+
+			{% if prediction_text %}
+			<div class="result">{{ prediction_text }}</div>
+			{% endif %}
+		</section>
+	</div>
 </body>
 </html>
